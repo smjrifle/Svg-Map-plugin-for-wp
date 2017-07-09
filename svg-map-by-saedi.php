@@ -91,6 +91,7 @@ function save_data() {
 	global $wpdb;
 
 	$points = esc_sql($_POST['points']);
+	$popup = esc_sql($_POST['popup']);
 	$table_name = $wpdb->prefix . 'svg_map';
 	$i = 0;
 	$results = $wpdb->get_results("Truncate $table_name");
@@ -100,6 +101,7 @@ function save_data() {
 			array(
 				'time' => current_time( 'mysql' ),
 				'map_point' => $point,
+				'map_popup' => $popup,
 				)
 			);
 			if ( ! $result ) {
@@ -125,6 +127,32 @@ function save_data() {
 		$table_name = $wpdb->prefix . 'svg_map';
 		$result = $wpdb->delete(
 			$table_name,
+			array(
+				'id' => $point,
+			)
+		);
+		if ( ! $result ) {
+			echo "Error Occured";
+		}
+
+		echo "Points Deleted";
+
+		wp_die();
+	}
+
+	add_action( 'wp_ajax_add_popup', 'add_popup' );
+
+	function add_popup() {
+		global $wpdb;
+
+		$point = esc_sql($_POST['point']);
+		$popup = esc_sql($_POST['popup']);
+		$table_name = $wpdb->prefix . 'svg_map';
+		$result = $wpdb->update(
+			$table_name,
+			array(
+				'map_popup' => $popup,
+			),
 			array(
 				'id' => $point,
 			)

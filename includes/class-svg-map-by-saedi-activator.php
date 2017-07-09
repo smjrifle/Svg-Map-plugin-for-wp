@@ -40,6 +40,7 @@ class Svg_Map_By_Saedi_Activator {
 			id mediumint(9) NOT NULL AUTO_INCREMENT,
 			time datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 			map_point tinytext NOT NULL,
+			map_popup text NOT NULL,
 			PRIMARY KEY  (id)
 		) $charset_collate;";
 

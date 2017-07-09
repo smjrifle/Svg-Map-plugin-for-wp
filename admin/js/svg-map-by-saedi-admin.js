@@ -40,8 +40,9 @@
 		//showinmap
 		var ul = $("svg.map");
 		var items = ul.find("circle");
-		for(var i = 0; i < js_map.length; i++) {
-			items.eq(js_map[i]).addClass("selected");
+		console.log(js_map_popup);
+		for(var i = 0; i < js_map_points.length; i++) {
+			items.eq(js_map_points[i]).addClass("selected");
 		}
 
 		//Save point Ajax
@@ -62,6 +63,26 @@
 			// since 2.8 ajaxurl is always defined in the admin header and points to admin-ajax.php
 			jQuery.post(ajaxurl, data, function(response) {
 				$('#msg').html(response);
+				window.setTimeout( location.reload(), 3000 );
+			});
+		});
+
+		//Add Popup Ajax
+		$('.add_popup').click(function() {
+			var point = $(this).attr('data-point');
+			var popup = $('#popup-'+point).val();
+			console.log(popup);
+			if(point == null || popup == null)
+			return;
+			var data = {
+				'action': 'add_popup',
+				'point': point,
+				'popup': popup
+			};
+
+			// since 2.8 ajaxurl is always defined in the admin header and points to admin-ajax.php
+			jQuery.post(ajaxurl, data, function(response) {
+				$('#removemsg').html(response);
 				window.setTimeout( location.reload(), 3000 );
 			});
 		});
