@@ -1,3 +1,4 @@
+<h4>Click on the dots to add a location, then after saving use the popup feature below to add description</h4>
 <?php
 echo '<div class="world-map-admin">
 <svg class="map" viewBox="0 0 845.2 458">

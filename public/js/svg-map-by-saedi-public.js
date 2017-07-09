@@ -31,9 +31,10 @@
 
 	var ul = $("svg.map");
 	var items = ul.find("circle");
-	console.log(js_map_popup);
-	for(var i = 0; i < js_map_points.length; i++) {
-		items.eq(js_map_points[i]).addClass("selected");
+	if (typeof js_map_points !== 'undefined') {
+		console.log(js_map_popup);
+		for(var i = 0; i < js_map_points.length; i++) {
+			items.eq(js_map_points[i]).addClass("selected");
+		}
 	}
-
 })( jQuery );
