@@ -2641,7 +2641,7 @@ echo '<div class="world-map-admin">
         ?>
         <table class="wp-list-table widefat fixed striped posts">
             <tr>
-                <th class="manage-column column-title column-primary">ID</th>
+                <th class="manage-column column-title column-primary">SN</th>
                 <th class="manage-column column-title column-primary">Map Point</th>
                 <th class="manage-column column-title column-primary">Map Popup</th>
                 <th class="manage-column column-title column-primary">Action</th>

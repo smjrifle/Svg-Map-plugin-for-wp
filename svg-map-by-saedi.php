@@ -91,28 +91,30 @@ function save_data() {
 	global $wpdb;
 
 	$points = esc_sql($_POST['points']);
-	$popup = esc_sql($_POST['popup']);
+	$popup = '';
 	$table_name = $wpdb->prefix . 'svg_map';
 	$i = 0;
-	$results = $wpdb->get_results("Truncate $table_name");
+	$map_points = implode( ',', array_map( 'absint', $points ) );
+	$delete_unselected = $wpdb->query( "DELETE FROM $table_name WHERE map_point NOT IN ($map_points)" );
 	foreach ($points as $point) {
-		$result = $wpdb->insert(
-			$table_name,
-			array(
-				'time' => current_time( 'mysql' ),
-				'map_point' => $point,
-				'map_popup' => $popup,
-				)
-			);
-			if ( ! $result ) {
-				echo "Error Occured";
-			}
-			else {
-				$i++;
+		$fetch = $wpdb->get_results("SELECT * FROM $table_name where map_point='$point'");
+		if($wpdb->num_rows == 0) {
+			$result = $wpdb->insert(
+				$table_name,
+				array(
+					'time' => current_time( 'mysql' ),
+					'map_point' => $point,
+					'map_popup' => $popup,
+					)
+				);
+				if ( ! $result ) {
+					echo "Error Occured";
+				}
+				else {
+					$i++;
+				}
 			}
 		}
-
-
 		echo $i . " Points Added";
 
 		wp_die();
