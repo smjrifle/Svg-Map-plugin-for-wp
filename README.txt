@@ -1,5 +1,5 @@
 === Plugin Name ===
-Contributors:
+Contributors: @bhaskarkc
 Donate link: https://smjrifle.net
 Tags: comments, spam
 Requires at least: 3.0.1
@@ -13,7 +13,7 @@ This plugin adds the svg map with point animation
 == Description ==
 
 This plugin adds the svg map with points selection
-//To Do: Color Selection | Customization Addition | Animation Enable Disable | Onhover Popup | Animation Size | Circle radius
+//To Do: Color Selection | Customization Addition | Animation Enable Disable | Onhover Popup | Circle Animation Size | Circle radius Customization | Fix Code Standard
 
 == Installation ==
 
