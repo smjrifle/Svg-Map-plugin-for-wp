@@ -29,12 +29,12 @@
 	* practising this, we should strive to set a better example in our own work.
 	*/
 
-	var ul = $("svg.map");
-	var items = ul.find("circle");
+	var ul = $( "svg.map" );
+	var items = ul.find( "circle" );
 	if (typeof js_map_points !== 'undefined') {
-		console.log(js_map_popup);
-		for(var i = 0; i < js_map_points.length; i++) {
-			items.eq(js_map_points[i]).addClass("selected");
+		console.log( js_map_popup );
+		for (var i = 0; i < js_map_points.length; i++) {
+			items.eq( js_map_points[i] ).addClass( "selected" );
 		}
 	}
 })( jQuery );
