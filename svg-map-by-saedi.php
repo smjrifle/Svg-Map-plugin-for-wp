@@ -75,14 +75,14 @@ function run_svg_map_by_saedi() {
 run_svg_map_by_saedi();
 
 
-add_action('admin_menu', 'svg_map_setup_menu');
+add_action( 'admin_menu', 'svg_map_setup_menu' );
 
-function svg_map_setup_menu(){
+function svg_map_setup_menu() {
 	add_menu_page( 'SVG Map By Saedi', 'SVG Map', 'manage_options', 'svg-map-saedi', 'svg_map_init' );
 }
 
-function svg_map_init(){
-	include(plugin_dir_path( __FILE__ ) . 'admin/svg-map.php');
+function svg_map_init() {
+	include( plugin_dir_path( __FILE__ ) . 'admin/svg-map.php' );
 }
 
 add_action( 'wp_ajax_save_data', 'save_data' );
@@ -90,15 +90,15 @@ add_action( 'wp_ajax_save_data', 'save_data' );
 function save_data() {
 	global $wpdb;
 
-	$points = esc_sql($_POST['points']);
+	$points = esc_sql( $_POST['points'] );
 	$popup = '';
 	$table_name = $wpdb->prefix . 'svg_map';
 	$i = 0;
 	$map_points = implode( ',', array_map( 'absint', $points ) );
 	$delete_unselected = $wpdb->query( "DELETE FROM $table_name WHERE map_point NOT IN ($map_points)" );
-	foreach ($points as $point) {
-		$fetch = $wpdb->get_results("SELECT * FROM $table_name where map_point='$point'");
-		if($wpdb->num_rows == 0) {
+	foreach ( $points as $point ) {
+		$fetch = $wpdb->get_results( "SELECT * FROM $table_name where map_point='$point'" );
+		if ( $wpdb->num_rows == 0 ) {
 			$result = $wpdb->insert(
 				$table_name,
 				array(
@@ -106,69 +106,69 @@ function save_data() {
 					'map_point' => $point,
 					'map_popup' => $popup,
 					)
-				);
-				if ( ! $result ) {
-					echo "Error Occured";
-				}
-				else {
-					$i++;
-				}
+			);
+			if ( ! $result ) {
+				echo 'Error Occured';
+			} else {
+				$i++;
 			}
 		}
-		echo $i . " Points Added";
+	}
+		echo $i . ' Points Added';
 
 		wp_die();
-	}
+}
 
 	add_action( 'wp_ajax_delete_data', 'delete_data' );
 
-	function delete_data() {
-		global $wpdb;
+function delete_data() {
+	global $wpdb;
 
-		$point = esc_sql($_POST['point']);
-		$table_name = $wpdb->prefix . 'svg_map';
-		$result = $wpdb->delete(
-			$table_name,
-			array(
-				'id' => $point,
-			)
-		);
-		if ( ! $result ) {
-			echo "Error Occured";
-		}
-
-		echo "Points Deleted";
-
-		wp_die();
+	$point = esc_sql( $_POST['point'] );
+	$table_name = $wpdb->prefix . 'svg_map';
+	$result = $wpdb->delete(
+		$table_name,
+		array(
+		'id' => $point,
+		)
+	);
+	if ( ! $result ) {
+		echo 'Error Occured';
 	}
+
+	echo 'Points Deleted';
+
+	wp_die();
+}
 
 	add_action( 'wp_ajax_add_popup', 'add_popup' );
 
-	function add_popup() {
-		global $wpdb;
+function add_popup() {
+	global $wpdb;
 
-		$point = esc_sql($_POST['point']);
-		$popup = esc_sql($_POST['popup']);
-		$table_name = $wpdb->prefix . 'svg_map';
-		$result = $wpdb->update(
-			$table_name,
-			array(
-				'map_popup' => $popup,
-			),
-			array(
-				'id' => $point,
-			)
-		);
-		if ( ! $result ) {
-			echo "Error Occured";
-		}
-
-		echo "Points Deleted";
-
-		wp_die();
+	$point = esc_sql( $_POST['point'] );
+	$popup = esc_sql( $_POST['popup'] );
+	$table_name = $wpdb->prefix . 'svg_map';
+	$result = $wpdb->update(
+		$table_name,
+		array(
+		'map_popup' => $popup,
+		),
+		array(
+		'id' => $point,
+		)
+	);
+	if ( ! $result ) {
+		echo 'Error Occured';
 	}
 
-	function display_map( $atts ) {
-		include(plugin_dir_path( __FILE__ ) . 'public/partials/svg-map-by-saedi-public-display.php');;
-	}
+	echo 'Points Deleted';
+
+	wp_die();
+}
+
+function display_map( $atts ) {
+	include( plugin_dir_path( __FILE__ ) . 'public/partials/svg-map-by-saedi-public-display.php' );
+	;
+}
 	add_shortcode( 'display_svg_map', 'display_map' );
