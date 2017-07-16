@@ -29,12 +29,33 @@
 	* practising this, we should strive to set a better example in our own work.
 	*/
 
-	var ul = $( "svg.map" );
-	var items = ul.find( "circle" );
+	var tooltipSpan = document.getElementById('tooltip-span');
+
+	var ul = $("svg.map");
+	var items = ul.find("circle");
 	if (typeof js_map_points !== 'undefined') {
-		console.log( js_map_popup );
-		for (var i = 0; i < js_map_points.length; i++) {
-			items.eq( js_map_points[i] ).addClass( "selected" );
+		for(var i = 0; i < js_map_points.length; i++) {
+			items.eq(js_map_points[i]).addClass("selected");
+			if (typeof js_map_popup[i] !== 'undefined') {
+				items.eq(js_map_points[i]).attr("data-toggle", "tooltip");
+				items.eq(js_map_points[i]).attr("title", js_map_popup[i]);
+			}
 		}
 	}
+	$(document).ready(function() {
+		$('.selected').hover(function (e) {
+			var x = e.clientX,
+				y = e.clientY;
+			tooltipSpan.style.top = (y + 10) + 'px';
+			tooltipSpan.style.left = (x + 10) + 'px';
+			tooltipSpan.style.display = "block";
+			tooltipSpan.innerHTML = $(this).attr('title');
+		},function (e) {
+			var x = e.clientX,
+				y = e.clientY;
+			tooltipSpan.style.top = (y + 20) + 'px';
+			tooltipSpan.style.left = (x + 20) + 'px';
+			tooltipSpan.style.display = "none";
+		});
+	});
 })( jQuery );

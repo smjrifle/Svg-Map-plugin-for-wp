@@ -15,8 +15,19 @@
  }
  .world-map svg.map .selected {
 	 fill: #242964;
+	 -webkit-transition: all 2s ease;
 	 transition: all 2s ease;
-	 box-shadow: 0 0 0 0 rgba(232, 76, 61, 0.7);
-	 animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+	 -webkit-box-shadow: 0 0 0 0 rgba(232, 76, 61, 0.7);
+	         box-shadow: 0 0 0 0 rgba(232, 76, 61, 0.7);
+	 -webkit-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+	         animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
  }
+ .world-map #tooltip-span {
+    display:none;
+    position:fixed;
+    overflow:hidden;
+    background: #ccc;
+    padding: 2px 8px;
+    color: #FFF;
+}
  /* End SVG Map */

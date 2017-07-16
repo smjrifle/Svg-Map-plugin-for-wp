@@ -2637,6 +2637,7 @@
 		<circle class="st0" cx="19" cy="151" r="1.9"/>
 		<circle class="st0" cx="19" cy="157.8" r="1.9"/>
 	</svg>
+	<span id="tooltip-span">Hover me</span>
 </div>
 <?php
 global $wpdb;
