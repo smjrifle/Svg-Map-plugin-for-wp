@@ -171,4 +171,4 @@ function display_map( $atts ) {
 	include( plugin_dir_path( __FILE__ ) . 'public/partials/svg-map-by-saedi-public-display.php' );
 	;
 }
-	add_shortcode( 'display_svg_map', 'display_map' );
+add_shortcode( 'display_svg_map', 'display_map' );
