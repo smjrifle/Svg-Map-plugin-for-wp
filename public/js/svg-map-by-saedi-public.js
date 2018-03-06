@@ -33,12 +33,12 @@
 
 	var ul = $("svg.map");
 	var items = ul.find("circle");
-	if (typeof svgData.js_map_points !== 'undefined') {
-		for(var i = 0; i < svgData.js_map_points.length; i++) {
-			items.eq(svgData.js_map_points[i]).addClass("selected");
-			if (typeof svgData.js_map_popup[i] !== 'undefined') {
-				items.eq(svgData.js_map_points[i]).attr("data-toggle", "tooltip");
-				items.eq(svgData.js_map_points[i]).attr("title", js_map_popup[i]);
+	if (typeof svgData.points_for_js !== 'undefined') {
+		for(var i = 0; i < svgData.points_for_js.length; i++) {
+			items.eq(svgData.points_for_js[i]).addClass("selected");
+			if (typeof svgData.popup_for_js[i] !== 'undefined') {
+				items.eq(svgData.points_for_js[i]).attr("data-toggle", "tooltip");
+				items.eq(svgData.points_for_js[i]).attr("title", svgData.popup_for_js[i]);
 			}
 		}
 	}
